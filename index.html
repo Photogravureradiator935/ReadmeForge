@@ -901,87 +901,223 @@ function badge(nm,c,l,lc='white'){return`![${nm}](https://img.shields.io/badge/$
 function sbadge(nm,c,l,url){return`[![${nm}](https://img.shields.io/badge/${nm.replace(/-/g,'--')}-${c}?style=for-the-badge&logo=${l}&logoColor=white)](${toU(url)})`;}
 function toU(u){if(!u)return'#';return u.startsWith('http')?u:'https://'+u;}
 
+// Map language names to flag emojis
+function langFlag(nm){
+  const n=nm.toLowerCase();
+  if(n.includes('russian')||n.includes('русский')) return '🇷🇺';
+  if(n.includes('english')) return '🇬🇧';
+  if(n.includes('german')||n.includes('deutsch')||n.includes('немецкий')) return '🇩🇪';
+  if(n.includes('french')||n.includes('français')) return '🇫🇷';
+  if(n.includes('spanish')||n.includes('español')) return '🇪🇸';
+  if(n.includes('chinese')||n.includes('中文')) return '🇨🇳';
+  if(n.includes('japanese')||n.includes('日本語')) return '🇯🇵';
+  if(n.includes('korean')) return '🇰🇷';
+  if(n.includes('portuguese')||n.includes('português')) return '🇧🇷';
+  if(n.includes('italian')||n.includes('italiano')) return '🇮🇹';
+  if(n.includes('arabic')||n.includes('عربي')) return '🇸🇦';
+  if(n.includes('turkish')||n.includes('türkçe')) return '🇹🇷';
+  return '🌐';
+}
+
+// Proficiency bars
+const bars=['','🟥⬛⬛⬛⬛','🟧🟧⬛⬛⬛','🟨🟨🟨⬛⬛','🟩🟩🟩🟩⬛','🟩🟩🟩🟩🟩'];
+
 // ── GENERATE ──
 function gen(){
-  const name=v('fn')||'Your Name',user=v('fu')||'YOUR_USERNAME',
-    role=v('fr'),loc=v('fl'),bio=v('fb'),learn=v('fle'),fun=v('ff'),
-    lines=v('ft').split('\n').filter(Boolean);
+  const name  = v('fn')||'Your Name';
+  const user  = v('fu')||'YOUR_USERNAME';
+  const role  = v('fr')||'Developer';
+  const loc   = v('fl');
+  const bio   = v('fb');
+  const learn = v('fle');
+  const fun   = v('ff');
+  const lines = v('ft').split('\n').filter(Boolean);
 
-  const stacks=[
-    {lb:'Languages',cs:chips('cl')},
-    {lb:'Frontend',cs:chips('cfe')},
-    {lb:'Backend & Databases',cs:chips('cbe')},
-    {lb:'DevOps & Cloud',cs:chips('cops')},
-    {lb:'AI / ML',cs:chips('cai')},
+  const allChips=[
+    {lb:'Languages',        cs:chips('cl')},
+    {lb:'Frontend',         cs:chips('cfe')},
+    {lb:'Backend & Databases', cs:chips('cbe')},
+    {lb:'DevOps & Cloud',   cs:chips('cops')},
+    {lb:'AI / ML',          cs:chips('cai')},
   ].filter(s=>s.cs.length);
 
   const slangs=[...document.querySelectorAll('.lang-row')].map(r=>{
-    const nm=r.querySelector('.ln')?.value?.trim();if(!nm)return null;
+    const nm=r.querySelector('.ln')?.value?.trim(); if(!nm) return null;
     const lv=[...r.querySelectorAll('.dot')].filter(d=>d.classList.contains('on')).length;
-    return{nm,lv,lb:['','Basic','Conversational','Intermediate','Advanced','Native'][lv]||'Fluent'};
+    return{nm, lv, lb:['','Basic','Conversational','Intermediate','Advanced','Native'][lv]||'Fluent'};
   }).filter(Boolean);
 
+  // Social badges — all inline
   const socs=[];
-  const li=v('sli');  if(li)  socs.push(sbadge('LinkedIn','0077B5','linkedin',li));
-  const tw=v('stw');  if(tw)  socs.push(sbadge('Twitter','1DA1F2','twitter',tw));
-  const tg=v('stg');  if(tg)  socs.push(sbadge('Telegram','2CA5E0','telegram',tg));
-  const yt=v('syt');  if(yt)  socs.push(sbadge('YouTube','FF0000','youtube',yt));
-  const tv=v('stv');  if(tv)  socs.push(sbadge('Twitch','9146FF','twitch',tv));
-  const dv=v('sdev'); if(dv)  socs.push(sbadge('Dev.to','0A0A0A','devdotto',dv));
-  const md=v('smed'); if(md)  socs.push(sbadge('Medium','12100E','medium',md));
-  const em=v('sem');  if(em)  socs.push(`[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:${em})`);
-  const wb=v('sweb'); if(wb)  socs.push(sbadge('Portfolio','FF5722','googlechrome',wb));
-  const bm=v('sbmc'); if(bm&&T.bmc) socs.push(sbadge('Buy+Me+a+Coffee','FFDD00','buymeacoffee',bm));
+  const li=v('sli');   if(li)  socs.push(sbadge('LinkedIn','0077B5','linkedin',li));
+  const tw=v('stw');   if(tw)  socs.push(sbadge('Twitter','1DA1F2','twitter',tw));
+  const tg=v('stg');   if(tg)  socs.push(sbadge('Telegram','2CA5E0','telegram',tg));
+  const yt=v('syt');   if(yt)  socs.push(sbadge('YouTube','FF0000','youtube',yt));
+  const tv=v('stv');   if(tv)  socs.push(sbadge('Twitch','9146FF','twitch',tv));
+  const dv=v('sdev');  if(dv)  socs.push(sbadge('Dev.to','0A0A0A','devdotto',dv));
+  const md=v('smed');  if(md)  socs.push(sbadge('Medium','12100E','medium',md));
+  const em=v('sem');   if(em)  socs.push(`[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:${em})`);
+  const wb=v('sweb');  if(wb)  socs.push(sbadge('Portfolio','FF5722','googlechrome',wb));
+  const bm=v('sbmc');  if(bm&&T.bmc) socs.push(sbadge('Buy%20Me%20a%20Coffee','FFDD00','buymeacoffee',bm));
 
-  let o='';
-  o+=`<div align="center">\n\n# Hi there, I'm ${name} 👋\n\n`;
-  if(T.typing&&lines.length){
-    o+=`[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=6C63FF&center=true&vCenter=true&width=600&lines=${lines.map(l=>encodeURIComponent(l)).join(';')})](https://git.io/typing-svg)\n\n`;
-  }
-  if(T.views) o+=`![Profile Views](https://komarev.com/ghpvc/?username=${user}&color=6C63FF&style=flat-square)\n`;
-  o+=`\n</div>\n\n---\n\n`;
+  let o = '';
 
-  o+=`## 🧑‍💻 About Me\n\n\`\`\`yaml\nname: "${name}"\n`;
-  if(role)  o+=`role: "${role}"\n`;
-  if(loc)   o+=`location: "${loc}"\n`;
-  if(bio)   o+=`bio: "${bio}"\n`;
-  if(learn) o+=`learning: "${learn}"\n`;
-  if(fun)   o+=`fun_fact: "${fun}"\n`;
-  o+=`\`\`\`\n\n---\n\n`;
+  // ── 1. BANNER ──
+  const bannerDesc = encodeURIComponent(role);
+  o += `<div align="center">\n`;
+  o += `  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=${encodeURIComponent(name)}&fontSize=60&fontColor=ffffff&fontAlignY=36&desc=${bannerDesc}&descSize=18&descAlignY=58&descColor=ffffffcc&animation=fadeIn" width="100%"/>\n`;
+  o += `</div>\n\n`;
 
-  if(stacks.length){
-    o+=`## 🛠️ Tech Stack\n\n`;
-    for(const s of stacks){o+=`**${s.lb}:**\n\n${s.cs.map(c=>badge(c.nm,c.c,c.l,c.lc)).join('\n')}\n\n`;}
-    o+=`---\n\n`;
+  // ── 2. TYPING + BADGES ──
+  o += `<div align="center">\n\n`;
+
+  if(T.typing && lines.length){
+    const enc = lines.map(l=>encodeURIComponent(l)).join(';');
+    o += `[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=00E87A&center=true&vCenter=true&width=600&lines=${enc})](https://git.io/typing-svg)\n\n`;
   }
 
+  o += `<br/>\n\n`;
+
+  // Social badges inline
+  if(socs.length){
+    o += socs.join('\n&nbsp;\n') + '\n';
+  }
+
+  // Profile views
+  if(T.views){
+    o += `\n[![Profile Views](https://komarev.com/ghpvc/?username=${user}&color=00e87a&style=for-the-badge&label=PROFILE+VIEWS)](https://github.com/${user})\n`;
+  }
+
+  o += `\n</div>\n\n---\n\n`;
+
+  // ── 3. ABOUT ME ──
+  o += `## 👋 About Me\n\n`;
+
+  // Intro paragraph if bio exists
+  if(bio){
+    o += `${bio}\n\n`;
+  }
+
+  // yaml card
+  o += '```yaml\n';
+  o += `name:     "${name}"\n`;
+  if(role)  o += `role:     "${role}"\n`;
+  if(loc)   o += `location: "${loc}"\n`;
+  if(learn) o += `learning: "${learn}"\n`;
+  if(fun)   o += `fun_fact: "${fun}"\n`;
+  o += '```\n\n---\n\n';
+
+  // ── 4. TECH STACK ──
+  if(allChips.length){
+    o += `## 🛠️ Tech Stack\n\n`;
+    for(const s of allChips){
+      o += `**${s.lb}:**\n\n`;
+      // badges on same line with spaces between
+      o += s.cs.map(c => badge(c.nm, c.c, c.l, c.lc)).join('\n') + '\n\n';
+    }
+    o += `---\n\n`;
+  }
+
+  // ── 5. LANGUAGES ──
   if(slangs.length){
-    const bars=['','🟥⬛⬛⬛⬛','🟧🟧⬛⬛⬛','🟨🟨🟨⬛⬛','🟩🟩🟩🟩⬛','🟩🟩🟩🟩🟩'];
-    o+=`## 🌍 Languages\n\n| Language | Level | Proficiency |\n|---|---|---|\n`;
-    for(const l of slangs) o+=`| ${l.nm} | ${l.lb} | ${bars[l.lv]||''} |\n`;
-    o+=`\n---\n\n`;
+    o += `## 🌍 Languages\n\n`;
+    o += `<div align="center">\n\n`;
+    o += `| Language | Level | Proficiency |\n|:---:|:---:|:---:|\n`;
+    for(const l of slangs){
+      o += `| ${langFlag(l.nm)} ${l.nm} | ${l.lb} | ${bars[l.lv]||''} |\n`;
+    }
+    o += `\n</div>\n\n---\n\n`;
   }
 
-  if(T.stats||T.langs){
-    o+=`## 📊 GitHub Stats\n\n<div align="center">\n\n`;
-    if(T.stats) o+=`<img height="180em" src="https://github-readme-stats.vercel.app/api?username=${user}&show_icons=true&theme=${theme}&include_all_commits=true&count_private=true"/>\n`;
-    if(T.langs) o+=`<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user}&layout=compact&langs_count=8&theme=${theme}"/>\n`;
-    o+=`\n</div>\n\n`;
+  // ── 6. GITHUB STATS ──
+  if(T.stats || T.langs){
+    o += `## 📊 GitHub Stats\n\n<div align="center">\n\n`;
+    if(T.stats) o += `<img height="180em" src="https://github-readme-stats.vercel.app/api?username=${user}&show_icons=true&theme=${theme}&include_all_commits=true&count_private=true&hide_border=true"/>\n&nbsp;\n`;
+    if(T.langs) o += `<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user}&layout=compact&langs_count=8&theme=${theme}&hide_border=true"/>\n`;
+    o += `\n</div>\n\n`;
   }
-  if(T.streak) o+=`<div align="center">\n\n[![GitHub Streak](https://streak-stats.demolab.com?user=${user}&theme=${theme}&hide_border=true)](https://git.io/streak-stats)\n\n</div>\n\n`;
-  if(T.stats||T.langs||T.streak) o+=`---\n\n`;
-  if(T.trophies) o+=`## 🏆 Trophies\n\n<div align="center">\n\n[![trophy](https://github-profile-trophy.vercel.app/?username=${user}&theme=${theme}&column=7&no-frame=true)](https://github.com/ryo-ma/github-profile-trophy)\n\n</div>\n\n---\n\n`;
-  if(T.activity) o+=`## 📈 Activity Graph\n\n[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=${user}&theme=${theme})](https://github.com/ashutosh00710/github-readme-activity-graph)\n\n---\n\n`;
-  if(T.waka)     o+=`## ⏱️ Coding Time\n\n[![WakaTime](https://github-readme-stats.vercel.app/api/wakatime?username=${user}&theme=${theme})](https://wakatime.com/@${user})\n\n---\n\n`;
-  if(T.spotify)  o+=`## 🎵 Now Playing\n\n[![Spotify](https://novatorem.vercel.app/api/spotify)](https://open.spotify.com)\n\n---\n\n`;
-  if(socs.length) o+=`## 🤝 Connect With Me\n\n<div align="center">\n\n${socs.join('\n')}\n\n</div>\n\n---\n\n`;
-  if(T.snake)    o+=`## 🐍 Contribution Snake\n\n<div align="center">\n\n<picture>\n  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake-dark.svg">\n  <img alt="snake" src="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake.svg">\n</picture>\n\n</div>\n\n---\n\n`;
-  if(T.quote)    o+=`<div align="center">\n\n### 💬 Dev Quote\n\n![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=${theme})\n\n---\n\n⭐️ From [${user}](https://github.com/${user}) — **Feel free to fork and customize!**\n\n</div>\n`;
 
-  document.getElementById('co').textContent=o;
-  const el=document.getElementById('out');
+  if(T.streak){
+    o += `<div align="center">\n\n`;
+    o += `[![GitHub Streak](https://streak-stats.demolab.com?user=${user}&theme=${theme}&hide_border=true)](https://git.io/streak-stats)\n\n`;
+    o += `</div>\n\n`;
+  }
+
+  if(T.stats || T.langs || T.streak) o += `---\n\n`;
+
+  // ── 7. TROPHIES ──
+  if(T.trophies){
+    // trophy widget supports limited themes
+    const trophyThemes=['flat','onedark','gruvbox','dracula','monokai','chalk',
+      'nord','alduin','darkhub','juicyfresh','buddhism','radical','onestar',
+      'discord','algolia','gitdimmed','tokyonight','matrix','apprentice',
+      'dark_dimmed','midnight_purple','kimbie_dark'];
+    const trophyTheme = trophyThemes.includes(theme) ? theme : 'tokyonight';
+    o += `## 🏆 GitHub Trophies\n\n`;
+    o += `<div align="center">\n\n`;
+    o += `[![trophy](https://github-profile-trophy.vercel.app/?username=${user}&theme=${trophyTheme}&column=6&no-frame=true&margin-w=8)](https://github.com/ryo-ma/github-profile-trophy)\n\n`;
+    o += `</div>\n\n---\n\n`;
+  }
+
+  // ── 8. ACTIVITY GRAPH ──
+  if(T.activity){
+    // activity-graph uses different theme names than github-readme-stats
+    const agThemeMap={
+      'tokyonight':'tokyo-night','radical':'redical','dracula':'dracula',
+      'nord':'nord-dark','gruvbox':'github','onedark':'react-dark',
+      'cobalt':'cobalt','synthwave':'synthwave','merko':'merko',
+      'midnight_purple':'midnight-purple','ocean_dark':'ocean-dark',
+      'aura':'aura','github_dark':'github-dark',
+      'material_palenight':'material_palenight','calm':'minimal',
+      'solarized-light':'minimal'
+    };
+    const agTheme = agThemeMap[theme] || 'tokyo-night';
+    o += `## 📈 Contribution Graph\n\n`;
+    o += `[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=${user}&theme=${agTheme}&hide_border=true&area=true)](https://github.com/ashutosh00710/github-readme-activity-graph)\n\n---\n\n`;
+  }
+
+  // ── 9. WAKATIME ──
+  if(T.waka){
+    o += `## ⏱️ Coding Time\n\n<div align="center">\n\n`;
+    o += `[![WakaTime](https://github-readme-stats.vercel.app/api/wakatime?username=${user}&theme=${theme}&hide_border=true)](https://wakatime.com/@${user})\n\n`;
+    o += `</div>\n\n> ⚠️ Requires a public WakaTime profile at wakatime.com/@${user}\n\n---\n\n`;
+  }
+
+  // ── 10. SPOTIFY ──
+  if(T.spotify){
+    o += `## 🎵 Now Playing\n\n<div align="center">\n\n`;
+    o += `[![Spotify](https://novatorem.vercel.app/api/spotify)](https://open.spotify.com)\n\n`;
+    o += `</div>\n\n> ⚠️ Requires [Novatorem](https://github.com/novatorem/novatorem) setup\n\n---\n\n`;
+  }
+
+  // ── 11. SNAKE ──
+  if(T.snake){
+    o += `## 🐍 Contribution Snake\n\n<div align="center">\n\n`;
+    o += `<picture>\n`;
+    o += `  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake-dark.svg">\n`;
+    o += `  <img alt="snake" src="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake.svg">\n`;
+    o += `</picture>\n\n`;
+    o += `</div>\n\n> ⚠️ Requires GitHub Actions workflow setup in your profile repo\n\n---\n\n`;
+  }
+
+  // ── 12. DEV QUOTE ──
+  if(T.quote){
+    o += `<div align="center">\n\n`;
+    o += `### 💬 Dev Quote\n\n`;
+    o += `![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=${theme})\n\n`;
+    o += `</div>\n\n---\n\n`;
+  }
+
+  // ── 13. FOOTER ──
+  o += `<div align="center">\n\n`;
+  o += `⭐️ From [${user}](https://github.com/${user}) — **thanks for visiting!**\n\n`;
+  o += `<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>\n\n`;
+  o += `</div>\n`;
+
+  document.getElementById('co').textContent = o;
+  const el = document.getElementById('out');
   el.classList.add('show');
-  setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),60);
+  setTimeout(()=>el.scrollIntoView({behavior:'smooth', block:'start'}), 60);
 }
 
 function copyIt(){
