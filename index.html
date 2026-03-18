@@ -137,18 +137,18 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 .srow input{background:transparent;border:none;padding:0;font-size:12px;box-shadow:none!important;border-color:transparent!important}
 
 /* ── COLOR SCHEMES ── */
-.color-schemes{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.color-schemes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .cs{
   display:flex;align-items:center;gap:10px;
-  padding:10px 16px;border-radius:10px;
+  padding:9px 14px;border-radius:10px;
   border:1.5px solid var(--border);background:rgba(255,255,255,0.03);
-  cursor:pointer;transition:all .2s;flex:1;min-width:140px;
+  cursor:pointer;transition:all .2s;min-width:130px;flex:1;
 }
 .cs:hover{border-color:rgba(255,255,255,0.15)}
 .cs.on{border-color:var(--cs-color)!important;background:rgba(0,0,0,0.2);box-shadow:0 0 0 1px var(--cs-color)}
-.cs-dot{width:20px;height:20px;border-radius:50%;flex-shrink:0}
-.cs-name{font-size:12px;font-weight:600}
-.cs-sub{font-size:10px;font-family:'Space Mono',monospace;color:var(--muted);margin-top:1px}
+.cs-dot{width:22px;height:22px;border-radius:50%;flex-shrink:0}
+.cs-name{font-size:11.5px;font-weight:600}
+.cs-sub{font-size:9.5px;font-family:'Space Mono',monospace;color:var(--muted);margin-top:1px}
 
 /* ── STATS THEMES ── */
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:9px;margin-bottom:20px}
@@ -424,29 +424,83 @@ footer strong{color:var(--accent)}
 
     <div class="slabel-row" style="margin-top:0"><span class="slabel">Accent Color</span></div>
     <div class="color-schemes" id="cs-grid">
-      <div class="cs on" data-color="#00e87a" data-r="0" data-g="232" data-b="122" style="--cs-color:#00e87a">
+      <!-- Solid colors -->
+      <div class="cs on" data-color="#00e87a" data-r="0" data-g="232" data-b="122" data-gradient="" style="--cs-color:#00e87a">
         <div class="cs-dot" style="background:#00e87a;box-shadow:0 0 10px rgba(0,232,122,0.5)"></div>
-        <div><div class="cs-name">Emerald</div><div class="cs-sub">#00e87a · default</div></div>
+        <div><div class="cs-name">Emerald</div><div class="cs-sub">#00e87a</div></div>
       </div>
-      <div class="cs" data-color="#6366f1" data-r="99" data-g="102" data-b="241" style="--cs-color:#6366f1">
+      <div class="cs" data-color="#6366f1" data-r="99" data-g="102" data-b="241" data-gradient="" style="--cs-color:#6366f1">
         <div class="cs-dot" style="background:#6366f1;box-shadow:0 0 10px rgba(99,102,241,0.5)"></div>
         <div><div class="cs-name">Violet</div><div class="cs-sub">#6366f1</div></div>
       </div>
-      <div class="cs" data-color="#3b82f6" data-r="59" data-g="130" data-b="246" style="--cs-color:#3b82f6">
+      <div class="cs" data-color="#3b82f6" data-r="59" data-g="130" data-b="246" data-gradient="" style="--cs-color:#3b82f6">
         <div class="cs-dot" style="background:#3b82f6;box-shadow:0 0 10px rgba(59,130,246,0.5)"></div>
         <div><div class="cs-name">Blue</div><div class="cs-sub">#3b82f6</div></div>
       </div>
-      <div class="cs" data-color="#f97316" data-r="249" data-g="115" data-b="22" style="--cs-color:#f97316">
+      <div class="cs" data-color="#f97316" data-r="249" data-g="115" data-b="22" data-gradient="" style="--cs-color:#f97316">
         <div class="cs-dot" style="background:#f97316;box-shadow:0 0 10px rgba(249,115,22,0.5)"></div>
         <div><div class="cs-name">Orange</div><div class="cs-sub">#f97316</div></div>
       </div>
-      <div class="cs" data-color="#ec4899" data-r="236" data-g="72" data-b="153" style="--cs-color:#ec4899">
+      <div class="cs" data-color="#ec4899" data-r="236" data-g="72" data-b="153" data-gradient="" style="--cs-color:#ec4899">
         <div class="cs-dot" style="background:#ec4899;box-shadow:0 0 10px rgba(236,72,153,0.5)"></div>
         <div><div class="cs-name">Pink</div><div class="cs-sub">#ec4899</div></div>
       </div>
-      <div class="cs" data-color="#06b6d4" data-r="6" data-g="182" data-b="212" style="--cs-color:#06b6d4">
+      <div class="cs" data-color="#06b6d4" data-r="6" data-g="182" data-b="212" data-gradient="" style="--cs-color:#06b6d4">
         <div class="cs-dot" style="background:#06b6d4;box-shadow:0 0 10px rgba(6,182,212,0.5)"></div>
         <div><div class="cs-name">Cyan</div><div class="cs-sub">#06b6d4</div></div>
+      </div>
+      <div class="cs" data-color="#a855f7" data-r="168" data-g="85" data-b="247" data-gradient="" style="--cs-color:#a855f7">
+        <div class="cs-dot" style="background:#a855f7;box-shadow:0 0 10px rgba(168,85,247,0.5)"></div>
+        <div><div class="cs-name">Purple</div><div class="cs-sub">#a855f7</div></div>
+      </div>
+      <div class="cs" data-color="#ef4444" data-r="239" data-g="68" data-b="68" data-gradient="" style="--cs-color:#ef4444">
+        <div class="cs-dot" style="background:#ef4444;box-shadow:0 0 10px rgba(239,68,68,0.5)"></div>
+        <div><div class="cs-name">Red</div><div class="cs-sub">#ef4444</div></div>
+      </div>
+      <div class="cs" data-color="#eab308" data-r="234" data-g="179" data-b="8" data-gradient="" style="--cs-color:#eab308">
+        <div class="cs-dot" style="background:#eab308;box-shadow:0 0 10px rgba(234,179,8,0.5)"></div>
+        <div><div class="cs-name">Gold</div><div class="cs-sub">#eab308</div></div>
+      </div>
+      <div class="cs" data-color="#14b8a6" data-r="20" data-g="184" data-b="166" data-gradient="" style="--cs-color:#14b8a6">
+        <div class="cs-dot" style="background:#14b8a6;box-shadow:0 0 10px rgba(20,184,166,0.5)"></div>
+        <div><div class="cs-name">Teal</div><div class="cs-sub">#14b8a6</div></div>
+      </div>
+      <div class="cs" data-color="#f0abfc" data-r="240" data-g="171" data-b="252" data-gradient="" style="--cs-color:#f0abfc">
+        <div class="cs-dot" style="background:#f0abfc;box-shadow:0 0 10px rgba(240,171,252,0.5)"></div>
+        <div><div class="cs-name">Lavender</div><div class="cs-sub">#f0abfc</div></div>
+      </div>
+      <div class="cs" data-color="#ffffff" data-r="255" data-g="255" data-b="255" data-gradient="" style="--cs-color:#aaaaaa">
+        <div class="cs-dot" style="background:linear-gradient(135deg,#fff,#888);box-shadow:0 0 10px rgba(255,255,255,0.3)"></div>
+        <div><div class="cs-name">White</div><div class="cs-sub">#ffffff</div></div>
+      </div>
+      <!-- Gradients — data-gradient stores the capsule-render color param -->
+      <div class="cs" data-color="#a855f7" data-r="168" data-g="85" data-b="247" data-gradient="timeGradient" style="--cs-color:#a855f7">
+        <div class="cs-dot" style="background:linear-gradient(135deg,#6366f1,#ec4899);box-shadow:0 0 10px rgba(168,85,247,0.5)"></div>
+        <div><div class="cs-name">Aurora</div><div class="cs-sub">violet → pink</div></div>
+      </div>
+      <div class="cs" data-color="#06b6d4" data-r="6" data-g="182" data-b="212" data-gradient="0,d1,ff,0092ff" style="--cs-color:#0092ff">
+        <div class="cs-dot" style="background:linear-gradient(135deg,#00d1ff,#0092ff);box-shadow:0 0 10px rgba(0,146,255,0.5)"></div>
+        <div><div class="cs-name">Ocean</div><div class="cs-sub">sky → blue</div></div>
+      </div>
+      <div class="cs" data-color="#00e87a" data-r="0" data-g="232" data-b="122" data-gradient="0,d2,691c,00e87a" style="--cs-color:#00e87a">
+        <div class="cs-dot" style="background:linear-gradient(135deg,#00e87a,#007a3d);box-shadow:0 0 10px rgba(0,232,122,0.5)"></div>
+        <div><div class="cs-name">Matrix</div><div class="cs-sub">lime → forest</div></div>
+      </div>
+      <div class="cs" data-color="#f97316" data-r="249" data-g="115" data-b="22" data-gradient="0,ff6b00,ff4500" style="--cs-color:#ff4500">
+        <div class="cs-dot" style="background:linear-gradient(135deg,#ffb300,#ff4500);box-shadow:0 0 10px rgba(255,69,0,0.5)"></div>
+        <div><div class="cs-name">Sunset</div><div class="cs-sub">amber → red</div></div>
+      </div>
+      <div class="cs" data-color="#ec4899" data-r="236" data-g="72" data-b="153" data-gradient="0,ff6ec7,c026d3" style="--cs-color:#c026d3">
+        <div class="cs-dot" style="background:linear-gradient(135deg,#ff6ec7,#c026d3);box-shadow:0 0 10px rgba(192,38,211,0.5)"></div>
+        <div><div class="cs-name">Neon Rose</div><div class="cs-sub">pink → magenta</div></div>
+      </div>
+      <div class="cs" data-color="#a855f7" data-r="168" data-g="85" data-b="247" data-gradient="0,7b2ff7,00e0ff" style="--cs-color:#7b2ff7">
+        <div class="cs-dot" style="background:linear-gradient(135deg,#7b2ff7,#00e0ff);box-shadow:0 0 10px rgba(123,47,247,0.5)"></div>
+        <div><div class="cs-name">Cosmic</div><div class="cs-sub">purple → cyan</div></div>
+      </div>
+      <div class="cs" data-color="#eab308" data-r="234" data-g="179" data-b="8" data-gradient="0,f9d423,e040fb" style="--cs-color:#f9d423">
+        <div class="cs-dot" style="background:linear-gradient(135deg,#f9d423,#e040fb);box-shadow:0 0 10px rgba(249,212,35,0.5)"></div>
+        <div><div class="cs-name">Candy</div><div class="cs-sub">gold → purple</div></div>
       </div>
     </div>
 
@@ -554,11 +608,13 @@ const siMap={
   'Azure':'azure','Vercel':'vercel','Nginx':'nginx','Git':'git','Linux':'linux',
   'VS Code':'vscode','Figma':'figma','Terraform':'terraform','GitHub Actions':'githubactions',
   'TensorFlow':'tensorflow','PyTorch':'pytorch','Pandas':'pandas',
-  'OpenCV':'opencv','Jupyter':'jupyter','NumPy':'numpy'
+  'OpenCV':'opencv','Jupyter':'jupyter','NumPy':'numpy',
+  'python':'python','javascript':'js','typescript':'ts','html5':'html','css3':'css',
+  'HTML':'html','CSS':'css','JS':'js','TS':'ts','Py':'python'
 };
 
 // ── COLOR SCHEME ──
-let accentColor='#00e87a', accentHex='00e87a', accentR=0, accentG=232, accentB=122;
+let accentColor='#00e87a', accentHex='00e87a', accentR=0, accentG=232, accentB=122, accentGradient='';
 
 document.querySelectorAll('.cs').forEach(el => {
   el.addEventListener('click', () => {
@@ -569,6 +625,7 @@ document.querySelectorAll('.cs').forEach(el => {
     accentR = parseInt(el.dataset.r);
     accentG = parseInt(el.dataset.g);
     accentB = parseInt(el.dataset.b);
+    accentGradient = el.dataset.gradient || '';
     const r = document.documentElement;
     r.style.setProperty('--accent', accentColor);
     r.style.setProperty('--accent-r', accentR);
@@ -844,100 +901,100 @@ function gen() {
 
   let o = '';
 
-  // BANNER — bold, modern header
-  o += `<div align="center">\n  <img src="https://capsule-render.vercel.app/api?type=waving&color=${accentHex}&height=240&section=header&text=${encodeURIComponent(name)}&fontSize=68&fontColor=ffffff&fontAlignY=38&fontStyle=bold&desc=${encodeURIComponent(role)}&descSize=20&descAlignY=58&descColor=ffffffaa&animation=fadeIn&stroke=ffffff&strokeWidth=2" width="100%"/>\n</div>\n\n`;
+  // Banner: use gradient param if available, else solid hex
+  const bannerColorParam = accentGradient || accentHex;
 
-  // TYPING + SOCIALS
+  // BANNER
+  o += `<div align="center">\n  <img src="https://capsule-render.vercel.app/api?type=waving&color=${bannerColorParam}&height=240&section=header&text=${encodeURIComponent(name)}&fontSize=68&fontColor=ffffff&fontAlignY=38&fontStyle=bold&desc=${encodeURIComponent(role)}&descSize=20&descAlignY=58&descColor=ffffffaa&animation=fadeIn&stroke=ffffff&strokeWidth=2" width="100%"/>\n</div>\n\n`;
+
+  // TYPING + SOCIALS — compact, one block, no --- after
   o += `<div align="center">\n\n`;
   if (T.typing && lines.length) {
     const enc = lines.map(l => encodeURIComponent(l)).join(';');
     o += `[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=${accentHex}&center=true&vCenter=true&width=600&lines=${enc})](https://git.io/typing-svg)\n\n`;
   }
-  if (socs.length) { o += socs.join(' ') + '\n\n'; }
-  if (T.views) o += `![Profile Views](https://komarev.com/ghpvc/?username=${user}&color=${accentHex}&style=flat-square)\n\n`;
+  const allBadges2 = [...socs];
+  if (T.views) allBadges2.push(`![Profile Views](https://komarev.com/ghpvc/?username=${user}&color=${accentHex}&style=flat-square)`);
+  if (allBadges2.length) o += allBadges2.join(' ') + '\n\n';
   o += `</div>\n\n`;
 
-  // ABOUT
+  // ABOUT — clean, no tables, consistent ⌖ ⌗ ◎ ⟳ symbols
   o += `## About\n\n`;
   if (bio) o += `${bio}\n\n`;
-  const infoRows = [];
-  if (loc)   infoRows.push(`📍 **Location** &nbsp; ${loc}`);
-  if (exp)   infoRows.push(`⌗ **Experience** &nbsp; ${exp}`);
-  if (edu)   infoRows.push(`◎ **Education** &nbsp; ${edu}`);
-  if (learn) infoRows.push(`⟳ **Learning** &nbsp; ${learn}`);
-  if (infoRows.length) {
-    // Use explicit br so GitHub renders each on its own line
-    o += infoRows.join(' <br/>\n') + '\n\n';
-  }
+  const infoItems2 = [];
+  if (loc)   infoItems2.push(`⌖ **Location** &nbsp; ${loc}`);
+  if (exp)   infoItems2.push(`⌗ **Experience** &nbsp; ${exp}`);
+  if (edu)   infoItems2.push(`◎ **Education** &nbsp; ${edu}`);
+  if (learn) infoItems2.push(`⟳ **Learning** &nbsp; ${learn}`);
+  if (infoItems2.length) o += infoItems2.join(' <br/>\n') + '\n\n';
   if (fun) o += `> ⚡ ${fun}\n\n`;
 
-  // STACK
+  // STACK — one --- before this block only
   if (sections.length) {
     o += `---\n\n## Stack\n\n`;
     sections.forEach(s => {
       o += `**${s.lb}**\n\n`;
-      if (s.si) {
-        o += `<img src="https://skillicons.dev/icons?i=${s.si}&theme=dark" alt="${s.lb}"/>\n\n`;
-      } else {
-        o += s.cs.map(c => badge(c.nm, c.c, c.l, c.lc)).join(' ') + '\n\n';
-      }
+      o += s.si
+        ? `<img src="https://skillicons.dev/icons?i=${s.si}&theme=dark" alt="${s.lb}"/>\n\n`
+        : s.cs.map(c => badge(c.nm, c.c, c.l, c.lc)).join(' ') + '\n\n';
     });
   }
 
-  // LANGUAGES — clean table with block bars
+  // LANGUAGES — no table, just plain bold text with flag and level word
   if (slangs.length) {
     o += `---\n\n## Languages\n\n`;
-    o += `| | Language | Level | &nbsp; |\n|:---:|:---|:---|:---|\n`;
     slangs.forEach(l => {
-      const filled = '█'.repeat(l.lv) + '░'.repeat(5 - l.lv);
-      o += `| ${langFlag(l.nm)} | **${l.nm}** | ${l.lb} | \`${filled}\` |\n`;
+      const lvlColor = ['','critical','important','yellow','success','brightgreen'];
+      const col = lvlColor[l.lv] || 'lightgrey';
+      o += `${langFlag(l.nm)} **${l.nm}** &nbsp; ![${l.lb}](https://img.shields.io/badge/-${encodeURIComponent(l.lb)}-${col}?style=flat-square) <br/>\n`;
     });
-    o += `\n`;
+    o += '\n';
   }
 
-  // STATS
-  if (T.stats || T.langs) {
+  // STATS — side by side in one div, streak below, no extra ---
+  if (T.stats || T.langs || T.streak) {
     o += `---\n\n## GitHub Stats\n\n<div align="center">\n\n`;
-    if (T.stats) o += `<img height="180em" src="https://github-readme-stats.vercel.app/api?username=${user}&show_icons=true&theme=${theme}&include_all_commits=true&count_private=true&hide_border=true"/>\n&nbsp;\n`;
-    if (T.langs) o += `<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user}&layout=compact&langs_count=8&theme=${theme}&hide_border=true"/>\n`;
-    o += `\n</div>\n\n`;
+    if (T.stats && T.langs) {
+      o += `<img height="165" src="https://github-readme-stats.vercel.app/api?username=${user}&show_icons=true&theme=${theme}&include_all_commits=true&count_private=true&hide_border=true"/> <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user}&layout=compact&langs_count=8&theme=${theme}&hide_border=true"/>\n\n`;
+    } else if (T.stats) {
+      o += `<img height="165" src="https://github-readme-stats.vercel.app/api?username=${user}&show_icons=true&theme=${theme}&include_all_commits=true&count_private=true&hide_border=true"/>\n\n`;
+    } else if (T.langs) {
+      o += `<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user}&layout=compact&langs_count=8&theme=${theme}&hide_border=true"/>\n\n`;
+    }
+    if (T.streak) o += `[![GitHub Streak](https://streak-stats.demolab.com?user=${user}&theme=${theme}&hide_border=true)](https://git.io/streak-stats)\n\n`;
+    o += `</div>\n\n`;
   }
-  if (T.streak) o += `<div align="center">\n\n[![GitHub Streak](https://streak-stats.demolab.com?user=${user}&theme=${theme}&hide_border=true)](https://git.io/streak-stats)\n\n</div>\n\n`;
 
-  // TROPHIES — no extra --- before it, flows naturally after stats
+  // TROPHIES — no extra ---
   if (T.trophies) {
     const supported = ['flat','onedark','gruvbox','dracula','monokai','chalk','nord','alduin','darkhub','juicyfresh','buddhism','radical','onestar','discord','algolia','gitdimmed','tokyonight','matrix','apprentice','dark_dimmed','midnight_purple','kimbie_dark'];
     const tt = supported.includes(theme) ? theme : 'tokyonight';
     o += `## Trophies\n\n<div align="center">\n\n<a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=${user}&theme=${tt}&column=6&no-frame=true&margin-w=8" alt="trophies"/></a>\n\n</div>\n\n`;
   }
 
-  // ACTIVITY — single --- before this section
+  // ACTIVITY — one ---
   if (T.activity) {
     const agMap = {'tokyonight':'tokyo-night','radical':'redical','dracula':'dracula','nord':'nord-dark','gruvbox':'github','onedark':'react-dark','cobalt':'cobalt','synthwave':'synthwave','merko':'merko','midnight_purple':'midnight-purple','ocean_dark':'ocean-dark','aura':'aura','github_dark':'github-dark','material_palenight':'material_palenight','calm':'minimal','solarized-light':'minimal'};
     const ag = agMap[theme] || 'tokyo-night';
     o += `---\n\n## Activity\n\n[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=${user}&theme=${ag}&hide_border=true&area=true)](https://github.com/ashutosh00710/github-readme-activity-graph)\n\n`;
   }
 
-  // WAKATIME
   if (T.waka) o += `---\n\n## Coding Time\n\n<div align="center">\n\n[![WakaTime](https://github-readme-stats.vercel.app/api/wakatime?username=${user}&theme=${theme}&hide_border=true)](https://wakatime.com/@${user})\n\n</div>\n\n> ⚠️ Requires a public WakaTime profile\n\n`;
-
-  // SPOTIFY
   if (T.spotify) o += `---\n\n## Now Playing\n\n<div align="center">\n\n[![Spotify](https://novatorem.vercel.app/api/spotify)](https://open.spotify.com)\n\n</div>\n\n> ⚠️ Requires [Novatorem](https://github.com/novatorem/novatorem) setup\n\n`;
 
-  // SNAKE
   if (T.snake) {
     o += `---\n\n## Contribution Snake\n\n<div align="center">\n\n<picture>\n  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake-dark.svg">\n  <img alt="snake" src="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake.svg">\n</picture>\n\n</div>\n\n> ⚠️ Requires GitHub Actions setup\n\n`;
   }
 
-  // QUOTE
+  // QUOTE — one ---
   if (T.quote) {
     o += `---\n\n<div align="center">\n\n`;
     o += customQuote ? `> *"${customQuote}"*\n\n` : `![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=${theme})\n\n`;
     o += `</div>\n\n`;
   }
 
-  // FOOTER
-  o += `<div align="center">\n\n<sub>Made with <a href="https://lebedevnet.github.io/ReadmeForge">ReadmeForge</a> &nbsp;·&nbsp; <a href="https://github.com/${user}">github.com/${user}</a></sub>\n\n<img src="https://capsule-render.vercel.app/api?type=waving&color=${accentHex}&height=100&section=footer" width="100%"/>\n\n</div>\n`;
+  // FOOTER — gradient wave
+  o += `---\n\n<div align="center">\n\n<sub>Made with <a href="https://lebedevnet.github.io/ReadmeForge">ReadmeForge</a> &nbsp;·&nbsp; <a href="https://github.com/${user}">github.com/${user}</a></sub>\n\n<img src="https://capsule-render.vercel.app/api?type=waving&color=${bannerColorParam}&height=120&section=footer" width="100%"/>\n\n</div>\n`;
 
   document.getElementById('co').textContent = o;
   const el = document.getElementById('out');
