@@ -417,6 +417,28 @@ footer strong{color:var(--accent)}
   </div>
 </div>
 
+<!-- 04b HEADER INFO -->
+<div class="card">
+  <div class="card-head"><div class="badge" style="background:var(--accent2,#6366f1)">✦</div><div class="cht"><div class="title">Header Info</div><div class="sub">// extra badges shown right after the banner</div></div></div>
+  <div class="card-body">
+    <div class="slabel-row" style="margin-top:0"><span class="slabel">Availability Status</span></div>
+    <div class="togs" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr));margin-bottom:16px">
+      <div class="tog on" data-k="status_open"   id="st_open">  <div><div class="tn">🟢 Open to work</div></div><div class="sw"></div></div>
+      <div class="tog"     data-k="status_build"  id="st_build"> <div><div class="tn">🔵 Building</div></div><div class="sw"></div></div>
+      <div class="tog"     data-k="status_busy"   id="st_busy">  <div><div class="tn">🔴 Busy</div></div><div class="sw"></div></div>
+      <div class="tog"     data-k="status_none"   id="st_none">  <div><div class="tn">— No status</div></div><div class="sw"></div></div>
+    </div>
+    <div class="row" style="margin-bottom:14px">
+      <div class="field"><label>Currently Building</label><input id="fproj" placeholder="ReadmeForge" oninput="updatePreview()"></div>
+      <div class="field"><label>Project URL</label><input id="fprojurl" placeholder="github.com/you/project" oninput="updatePreview()"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>City / Timezone</label><input id="ftz" placeholder="Moscow · UTC+3" oninput="updatePreview()"></div>
+      <div class="field"><label>Custom status text</label><input id="fstatustxt" placeholder="e.g. Freelancing · DM me" oninput="updatePreview()"></div>
+    </div>
+  </div>
+</div>
+
 <!-- 05 STYLE & THEME -->
 <div class="card">
   <div class="card-head"><div class="badge">05</div><div class="cht"><div class="title">Style &amp; Theme</div><div class="sub">// customize your README color scheme</div></div></div>
@@ -638,7 +660,17 @@ document.querySelectorAll('.cs').forEach(el => {
   });
 });
 
-// ── THEME ──
+// ── STATUS TOGGLE (single select) ──
+let currentStatus = 'open';
+const statusMap = { status_open:'open', status_build:'build', status_busy:'busy', status_none:'none' };
+document.querySelectorAll('[data-k^="status_"]').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('[data-k^="status_"]').forEach(x => x.classList.remove('on'));
+    el.classList.add('on');
+    currentStatus = statusMap[el.dataset.k];
+    updatePreview();
+  });
+});
 let theme = 'tokyonight';
 document.querySelectorAll('.tcard').forEach(t => {
   t.addEventListener('click', () => {
@@ -789,7 +821,7 @@ function renderPreview() {
 
   let html = '';
 
-  html += `<div class="pv-banner"><img src="https://capsule-render.vercel.app/api?type=waving&color=${accentHex}&height=120&section=header&text=${encodeURIComponent(displayName)}&fontSize=34&fontColor=ffffff&fontAlignY=38&desc=${encodeURIComponent(role)}&descSize=13&descAlignY=60&descColor=ffffffcc&animation=fadeIn" alt="banner" style="width:100%;display:block"></div>`;
+  html += `<div class="pv-banner"><img src="https://capsule-render.vercel.app/api?type=waving&color=${bannerColorParam || accentHex}&height=120&section=header&text=${encodeURIComponent(displayName)}&fontSize=34&fontColor=ffffff&fontAlignY=38&desc=${encodeURIComponent(role)}&descSize=13&descAlignY=60&descColor=ffffffcc&animation=fadeIn" alt="banner" style="width:100%;display:block"></div>`;
 
   if (T.typing && lines.length && user) {
     const enc = lines.map(l => encodeURIComponent(l)).join(';');
@@ -797,15 +829,33 @@ function renderPreview() {
   }
 
   if (socialBadges.length) {
-    html += `<div style="text-align:center;margin:8px 0 12px;display:flex;justify-content:center;flex-wrap:wrap;gap:5px">${socialBadges.join('')}</div>`;
+    html += `<div style="text-align:center;margin:8px 0 8px;display:flex;justify-content:center;flex-wrap:wrap;gap:5px">${socialBadges.join('')}</div>`;
   }
 
-  html += `<div class="pv-hr"></div>`;
+  // Header info row
+  const pvProj = v('fproj'), pvTz = v('ftz'), pvStxt = v('fstatustxt');
+  const headerInfoBadges = [];
+  if (currentStatus === 'open') {
+    const lbl = pvStxt || 'Open to work';
+    headerInfoBadges.push(`<img src="https://img.shields.io/badge/%F0%9F%9F%A2%20${encodeURIComponent(lbl)}-${accentHex}?style=flat-square" height="20">`);
+  } else if (currentStatus === 'build') {
+    const lbl = pvStxt || 'Building something';
+    headerInfoBadges.push(`<img src="https://img.shields.io/badge/%F0%9F%94%B5%20${encodeURIComponent(lbl)}-3b82f6?style=flat-square" height="20">`);
+  } else if (currentStatus === 'busy') {
+    const lbl = pvStxt || 'Busy right now';
+    headerInfoBadges.push(`<img src="https://img.shields.io/badge/%F0%9F%94%B4%20${encodeURIComponent(lbl)}-ef4444?style=flat-square" height="20">`);
+  }
+  if (pvProj) headerInfoBadges.push(`<img src="https://img.shields.io/badge/Building%20%E2%86%92%20${encodeURIComponent(pvProj)}-6366f1?style=flat-square&logo=github&logoColor=white" height="20">`);
+  if (pvTz)   headerInfoBadges.push(`<img src="https://img.shields.io/badge/${encodeURIComponent(pvTz)}-333?style=flat-square" height="20">`);
+  if (headerInfoBadges.length) {
+    html += `<div style="text-align:center;margin:4px 0 14px;display:flex;justify-content:center;flex-wrap:wrap;gap:5px">${headerInfoBadges.join('')}</div>`;
+  }
+
   html += `<div class="pv-h2">About</div>`;
   if (bio) html += `<p class="pv-p">${bio}</p>`;
 
   const infoItems = [];
-  if (loc)   infoItems.push(['📍','Location', loc]);
+  if (loc)   infoItems.push(['⌖','Location', loc]);
   if (exp)   infoItems.push(['⌗','Experience', exp]);
   if (edu)   infoItems.push(['◎','Education', edu]);
   if (learn) infoItems.push(['⟳','Learning', learn]);
@@ -818,20 +868,20 @@ function renderPreview() {
     html += `</div>`;
   }
   if (fun) html += `<div class="pv-blockquote">⚡ ${fun}</div>`;
-  html += `<div class="pv-hr"></div>`;
 
   const hasTech = langSi || feSi || beSi || opsSi || aiSi;
   if (hasTech) {
+    html += `<div class="pv-hr"></div>`;
     html += `<div class="pv-h2">Stack</div>`;
     [['Languages', langSi], ['Frontend', feSi], ['Backend', beSi], ['DevOps', opsSi], ['AI / ML', aiSi]].forEach(([lb, si]) => {
       if (!si) return;
       html += `<p style="font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.08em;margin:6px 0 5px">${lb}</p>`;
       html += `<div style="margin-bottom:4px"><img src="https://skillicons.dev/icons?i=${si}&theme=dark" alt="${lb}" style="height:38px;display:block"></div>`;
     });
-    html += `<div class="pv-hr"></div>`;
   }
 
   if (slangs.length) {
+    html += `<div class="pv-hr"></div>`;
     html += `<div class="pv-h2">Languages</div>`;
     html += `<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px">`;
     slangs.forEach(l => {
@@ -842,17 +892,17 @@ function renderPreview() {
         <img src="https://img.shields.io/badge/${encodeURIComponent(l.lb)}-${col}?style=flat-square" height="18" alt="${l.lb}">
       </div>`;
     });
-    html += `</div><div class="pv-hr"></div>`;
+    html += `</div>`;
   }
 
   if ((T.stats || T.langs) && user) {
+    html += `<div class="pv-hr"></div>`;
     html += `<div class="pv-h2">GitHub Stats</div>`;
     html += `<div class="pv-stats">`;
     if (T.stats) html += `<img src="https://github-readme-stats.vercel.app/api?username=${displayUser}&show_icons=true&theme=${theme}&hide_border=true" alt="stats">`;
     if (T.langs) html += `<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=${displayUser}&layout=compact&langs_count=6&theme=${theme}&hide_border=true" alt="langs">`;
     html += `</div>`;
     if (T.streak) html += `<div style="text-align:center;margin:8px 0"><img src="https://streak-stats.demolab.com?user=${displayUser}&theme=${theme}&hide_border=true" alt="streak" style="max-width:100%;border-radius:6px"></div>`;
-    html += `<div class="pv-hr"></div>`;
   }
 
   document.getElementById('preview-content').innerHTML = html;
@@ -916,6 +966,32 @@ function gen() {
   const allBadges2 = [...socs];
   if (T.views) allBadges2.push(`![Profile Views](https://komarev.com/ghpvc/?username=${user}&color=${accentHex}&style=flat-square)`);
   if (allBadges2.length) o += allBadges2.join(' ') + '\n\n';
+
+  // Header info badges — status, building, timezone
+  const headerInfo = [];
+  const proj    = v('fproj');
+  const projurl = v('fprojurl');
+  const tz      = v('ftz');
+  const stxt    = v('fstatustxt');
+
+  if (currentStatus === 'open') {
+    const label = stxt || 'Open to work';
+    headerInfo.push(`![${label}](https://img.shields.io/badge/%F0%9F%9F%A2%20${encodeURIComponent(label)}-${accentHex}?style=flat-square)`);
+  } else if (currentStatus === 'build') {
+    const label = stxt || 'Building something';
+    headerInfo.push(`![${label}](https://img.shields.io/badge/%F0%9F%94%B5%20${encodeURIComponent(label)}-3b82f6?style=flat-square)`);
+  } else if (currentStatus === 'busy') {
+    const label = stxt || 'Busy right now';
+    headerInfo.push(`![${label}](https://img.shields.io/badge/%F0%9F%94%B4%20${encodeURIComponent(label)}-ef4444?style=flat-square)`);
+  }
+  if (proj) {
+    const url = projurl ? (projurl.startsWith('http') ? projurl : 'https://' + projurl) : '#';
+    headerInfo.push(`[![Building · ${proj}](https://img.shields.io/badge/Building%20%E2%86%92%20${encodeURIComponent(proj)}-6366f1?style=flat-square&logo=github&logoColor=white)](${url})`);
+  }
+  if (tz) {
+    headerInfo.push(`![${tz}](https://img.shields.io/badge/${encodeURIComponent(tz)}-333?style=flat-square)`);
+  }
+  if (headerInfo.length) o += headerInfo.join(' ') + '\n\n';
   o += `</div>\n\n`;
 
   // ABOUT — clean, no tables, consistent ⌖ ⌗ ◎ ⟳ symbols
