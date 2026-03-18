@@ -4,7 +4,7 @@
 
 <div align="center">
 
-<a href="https://lebedevnet.github.io/ReadmeForge/"><img src="https://capsule-render.vercel.app/api?type=rect&color=238636&height=52&text=Open%20ReadmeForge%20%E2%86%92&fontSize=16&fontColor=ffffff&fontAlignY=55" width="240" alt="Open ReadmeForge"/></a>
+<a href="https://lebedevnet.github.io/ReadmeForge/"><img src="https://img.shields.io/badge/Open%20ReadmeForge%20%E2%86%92-238636?style=for-the-badge" height="52" width="240" alt="Open ReadmeForge"/></a>
 
 &nbsp;
 
