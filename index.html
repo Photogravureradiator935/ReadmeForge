@@ -72,8 +72,8 @@ body::before{
 
 /* ── HEADER ── */
 header{
-  padding:52px 0 40px;
-  margin-bottom:44px;
+  padding:32px 0 24px;
+  margin-bottom:28px;
   position:relative;
 }
 
@@ -110,7 +110,7 @@ h1 em{color:var(--accent);font-style:normal}
 .header-divider{
   height:1px;
   background:linear-gradient(90deg,rgba(0,232,122,0.3),rgba(99,102,241,0.2),transparent);
-  margin-top:32px;
+  margin-top:20px;
 }
 
 /* ── GLASS CARD ── */
@@ -202,43 +202,85 @@ input,textarea{
   border-radius:10px;
   color:var(--text);
   font-family:'Space Mono',monospace;
-  font-size:12.5px;
-  padding:11px 14px;
+  font-size:13px;
+  padding:13px 16px;
   outline:none;
   transition:border-color .2s, box-shadow .2s, background .2s;
   width:100%;
 }
-input::placeholder,textarea::placeholder{color:var(--muted);font-size:11.5px}
+input::placeholder,textarea::placeholder{color:var(--muted);font-size:12px}
 input:focus,textarea:focus{
   background:rgba(255,255,255,0.05);
   border-color:var(--accent);
   box-shadow:0 0 0 3px rgba(0,232,122,0.1), 0 0 20px rgba(0,232,122,0.05);
 }
-textarea{resize:vertical;min-height:80px;line-height:1.6}
+textarea{resize:vertical;min-height:84px;line-height:1.6}
 
-/* ── SECTION LABEL ── */
+/* ── PROGRESS BAR ── */
+.progress-wrap{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:3px;background:rgba(255,255,255,0.06);
+}
+.progress-bar{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--accent),#00c9ff);
+  transition:width .4s ease;
+  box-shadow:0 0 8px var(--accent);
+}
+
+/* ── SECTION HEADER ROW ── */
+.slabel-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:22px 0 12px;
+}
+.slabel-row:first-child{margin-top:0}
 .slabel{
   display:flex;align-items:center;gap:10px;
   font-size:9px;
   font-family:'Space Mono',monospace;
   text-transform:uppercase;letter-spacing:.12em;font-weight:700;
   color:var(--muted);
-  margin:22px 0 12px;
+  flex:1;
 }
-.slabel:first-child{margin-top:0}
 .slabel::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.07),transparent)}
 
+.clear-btn{
+  font-size:9.5px;
+  font-family:'Space Mono',monospace;
+  color:var(--muted);
+  background:none;border:none;cursor:pointer;
+  padding:2px 6px;border-radius:4px;
+  transition:color .15s,background .15s;
+  white-space:nowrap;flex-shrink:0;margin-left:10px;
+}
+.clear-btn:hover{color:var(--danger);background:rgba(255,77,106,0.08)}
+
+/* ── TECH COUNTER BADGE ── */
+.counter{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-family:'Space Mono',monospace;color:var(--muted);
+  margin-left:8px;
+}
+.counter-num{
+  background:var(--accent);color:#070810;
+  font-size:10px;font-weight:700;
+  padding:1px 7px;border-radius:20px;
+  min-width:22px;text-align:center;
+  transition:transform .2s;
+}
+.counter-num.bump{transform:scale(1.3)}
+
 /* ── CHIPS ── */
-.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
 
 .chip{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:6px 12px;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;
   border-radius:100px;
   border:1px solid var(--border);
   background:rgba(255,255,255,0.04);
   cursor:pointer;
-  font-size:11.5px;
+  font-size:13px;
   font-family:'Space Mono',monospace;
   color:var(--text2);
   transition:border-color .15s, color .15s, background .15s, transform .15s, box-shadow .15s;
@@ -257,7 +299,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
   color:var(--accent);
   box-shadow:0 0 12px rgba(0,232,122,0.2);
 }
-.chip img{width:14px;height:14px;object-fit:contain;flex-shrink:0;border-radius:2px}
+.chip img{width:16px;height:16px;object-fit:contain;flex-shrink:0;border-radius:2px}
 
 /* ── SPOKEN LANGS ── */
 .lang-row{
@@ -489,6 +531,7 @@ footer strong{color:var(--accent)}
 </head>
 <body>
 
+<div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
 <div class="wrap">
 
 <!-- HEADER -->
@@ -540,11 +583,14 @@ footer strong{color:var(--accent)}
 <div class="card">
   <div class="card-head">
     <div class="badge">02</div>
-    <div class="cht"><div class="title">Tech Stack</div><div class="sub">// tap to select your technologies</div></div>
+    <div class="cht">
+      <div class="title">Tech Stack <span class="counter">selected <span class="counter-num" id="tech-count">0</span></span></div>
+      <div class="sub">// tap to select your technologies</div>
+    </div>
   </div>
   <div class="card-body">
 
-    <div class="slabel">Languages</div>
+    <div class="slabel-row"><span class="slabel">Languages</span><button class="clear-btn" onclick="clearGroup('cl')">clear</button></div>
     <div class="chips" id="cl">
       <div class="chip" data-v="Python"     data-c="3776AB" data-l="python"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"> Python</div>
       <div class="chip" data-v="JavaScript" data-c="F7DF1E" data-l="javascript" data-lc="black"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"> JavaScript</div>
@@ -569,7 +615,7 @@ footer strong{color:var(--accent)}
       <div class="chip" data-v="R"          data-c="276DC3" data-l="r"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/r/r-original.svg"> R</div>
     </div>
 
-    <div class="slabel">Frontend</div>
+    <div class="slabel-row"><span class="slabel">Frontend</span><button class="clear-btn" onclick="clearGroup('cfe')">clear</button></div>
     <div class="chips" id="cfe">
       <div class="chip" data-v="React"       data-c="20232A" data-l="react" data-lc="61DAFB"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"> React</div>
       <div class="chip" data-v="Next.js"     data-c="000000" data-l="nextdotjs"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"> Next.js</div>
@@ -587,7 +633,7 @@ footer strong{color:var(--accent)}
       <div class="chip" data-v="Remix"       data-c="000000" data-l="remix"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/remix/remix-original.svg"> Remix</div>
     </div>
 
-    <div class="slabel">Backend &amp; Databases</div>
+    <div class="slabel-row"><span class="slabel">Backend &amp; Databases</span><button class="clear-btn" onclick="clearGroup('cbe')">clear</button></div>
     <div class="chips" id="cbe">
       <div class="chip" data-v="Node.js"    data-c="339933" data-l="nodedotjs"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"> Node.js</div>
       <div class="chip" data-v="Express.js" data-c="404D59" data-l="express"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg"> Express</div>
@@ -608,7 +654,7 @@ footer strong{color:var(--accent)}
       <div class="chip" data-v="Prisma"     data-c="2D3748" data-l="prisma"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg"> Prisma</div>
     </div>
 
-    <div class="slabel">DevOps &amp; Cloud</div>
+    <div class="slabel-row"><span class="slabel">DevOps &amp; Cloud</span><button class="clear-btn" onclick="clearGroup('cops')">clear</button></div>
     <div class="chips" id="cops">
       <div class="chip" data-v="Docker"        data-c="2496ED" data-l="docker"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"> Docker</div>
       <div class="chip" data-v="Kubernetes"    data-c="326CE5" data-l="kubernetes"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg"> Kubernetes</div>
@@ -628,7 +674,7 @@ footer strong{color:var(--accent)}
       <div class="chip" data-v="Jenkins"       data-c="D33833" data-l="jenkins"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg"> Jenkins</div>
     </div>
 
-    <div class="slabel">AI / ML</div>
+    <div class="slabel-row"><span class="slabel">AI / ML</span><button class="clear-btn" onclick="clearGroup('cai')">clear</button></div>
     <div class="chips" id="cai">
       <div class="chip" data-v="TensorFlow" data-c="FF6F00" data-l="tensorflow"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg"> TensorFlow</div>
       <div class="chip" data-v="PyTorch"    data-c="EE4C2C" data-l="pytorch"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg"> PyTorch</div>
@@ -782,13 +828,39 @@ footer strong{color:var(--accent)}
 </div><!-- /wrap -->
 
 <script>
-// ── CHIP TOGGLE ──
-document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('on')));
+// ── PROGRESS BAR ──
+function updateProgress(){
+  const fields = ['fn','fu','fr','fl','fb'];
+  const filled = fields.filter(id => document.getElementById(id)?.value?.trim()).length;
+  const techOn = document.querySelectorAll('.chip.on').length;
+  const hasSocial = ['sli','stw','stg','syt','stv','sdev','smed','sem','sweb','sbmc'].some(id=>document.getElementById(id)?.value?.trim());
+  let score = 0;
+  score += (filled / fields.length) * 40;
+  score += Math.min(techOn / 5, 1) * 40;
+  score += hasSocial ? 20 : 0;
+  document.getElementById('pbar').style.width = Math.min(score, 100) + '%';
+}
+document.querySelectorAll('input,textarea').forEach(el => el.addEventListener('input', updateProgress));
 
-// Clean up will-change after card animations
-document.querySelectorAll('.card').forEach(card=>{
-  card.addEventListener('animationend',()=>{ card.style.willChange='auto'; },{once:true});
-});
+// ── CHIP TOGGLE + COUNTER ──
+function updateCounter(){
+  const n = document.querySelectorAll('.chip.on').length;
+  const el = document.getElementById('tech-count');
+  el.textContent = n;
+  el.classList.add('bump');
+  setTimeout(()=>el.classList.remove('bump'), 200);
+  updateProgress();
+}
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+  c.classList.toggle('on');
+  updateCounter();
+}));
+
+// ── CLEAR GROUP ──
+function clearGroup(id){
+  document.querySelectorAll('#'+id+' .chip.on').forEach(c=>c.classList.remove('on'));
+  updateCounter();
+}
 
 // ── THEME SELECT ──
 let theme='tokyonight';

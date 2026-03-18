@@ -27,11 +27,11 @@ Pick your stack → choose a theme → copy. No coding, no sign-up.
 
 <div align="center">
 
+[![ReadmeForge Preview](https://raw.githubusercontent.com/lebedevnet/ReadmeForge/main/preview.png)](https://lebedevnet.github.io/ReadmeForge/)
+
 > **[👉 Try it live at lebedevnet.github.io/ReadmeForge](https://lebedevnet.github.io/ReadmeForge/)**
 
 </div>
-
-*Screenshot coming soon — in the meantime, click the link above to see it live.*
 
 ---
 
