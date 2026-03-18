@@ -50,35 +50,15 @@ body{
   overflow-x:hidden;
 }
 
-/* ── ANIMATED BG ── */
-.bg-orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.orb{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(80px);
-  opacity:0;
-  animation:orbFloat 20s ease-in-out infinite;
-}
-.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,232,122,0.12),transparent 70%);top:-200px;left:-100px;animation-delay:0s}
-.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,0.1),transparent 70%);bottom:-150px;right:-100px;animation-delay:-7s}
-.orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(0,232,122,0.07),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-14s}
+/* ── STATIC BG gradients — no animation, no filter ── */
+.bg-orbs{display:none}
 
-@keyframes orbFloat{
-  0%  {opacity:0;transform:translate(0,0) scale(1)}
-  20% {opacity:1}
-  50% {transform:translate(30px,-40px) scale(1.05)}
-  80% {opacity:1}
-  100%{opacity:0;transform:translate(0,0) scale(1)}
-}
-
-/* ── GRID PATTERN ── */
 body::before{
   content:'';
   position:fixed;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);
-  background-size:60px 60px;
+  background:
+    radial-gradient(ellipse 700px 500px at 0% 0%,rgba(0,232,122,0.07) 0%,transparent 65%),
+    radial-gradient(ellipse 600px 500px at 100% 100%,rgba(99,102,241,0.06) 0%,transparent 65%);
   pointer-events:none;z-index:0;
 }
 
@@ -111,12 +91,11 @@ header{
   font-size:15px;font-weight:700;
   color:#070810;
   flex-shrink:0;
-  box-shadow:0 0 0 1px rgba(0,232,122,0.4), 0 0 30px var(--aglow);
-  animation:logoPulse 3s ease-in-out infinite;
+  box-shadow:0 0 24px var(--aglow);
 }
 @keyframes logoPulse{
-  0%,100%{box-shadow:0 0 0 1px rgba(0,232,122,0.4),0 0 24px var(--aglow)}
-  50%     {box-shadow:0 0 0 1px rgba(0,232,122,0.6),0 0 48px var(--aglow)}
+  0%,100%{opacity:1}
+  50%{opacity:.8}
 }
 
 h1{font-size:clamp(20px,3vw,26px);font-weight:800;letter-spacing:-0.02em;line-height:1.1}
@@ -136,17 +115,16 @@ h1 em{color:var(--accent);font-style:normal}
 
 /* ── GLASS CARD ── */
 .card{
-  background:var(--glass);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.045);
   border:1px solid var(--border);
   border-radius:20px;
   overflow:hidden;
   margin-bottom:20px;
   transition:border-color .3s, box-shadow .3s;
   opacity:0;
-  transform:translateY(24px);
-  animation:cardIn .5s ease forwards;
+  transform:translateY(20px);
+  animation:cardIn .45s ease forwards;
+  will-change:transform,opacity;
 }
 .card:nth-child(1){animation-delay:.05s}
 .card:nth-child(2){animation-delay:.12s}
@@ -157,6 +135,8 @@ h1 em{color:var(--accent);font-style:normal}
 @keyframes cardIn{
   to{opacity:1;transform:translateY(0)}
 }
+
+.card.done{will-change:auto}
 
 .card:hover{
   border-color:rgba(255,255,255,0.12);
@@ -170,10 +150,9 @@ h1 em{color:var(--accent);font-style:normal}
 .card-head{
   display:flex;align-items:center;gap:14px;
   padding:20px 26px;
-  background:var(--glass-b);
+  background:rgba(255,255,255,0.04);
   border-bottom:1px solid var(--border);
-  position:relative;
-  overflow:hidden;
+  position:relative;overflow:hidden;
 }
 
 .card-head::after{
@@ -257,14 +236,13 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
   padding:6px 12px;
   border-radius:100px;
   border:1px solid var(--border);
-  background:rgba(255,255,255,0.03);
+  background:rgba(255,255,255,0.04);
   cursor:pointer;
   font-size:11.5px;
   font-family:'Space Mono',monospace;
   color:var(--text2);
-  transition:all .2s ease;
+  transition:border-color .15s, color .15s, background .15s, transform .15s, box-shadow .15s;
   user-select:none;line-height:1;
-  backdrop-filter:blur(8px);
 }
 .chip:hover{
   border-color:rgba(0,232,122,0.5);
@@ -328,11 +306,10 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .srow{
   display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,0.03);
+  background:rgba(255,255,255,0.04);
   border:1px solid var(--border);
   border-radius:10px;padding:10px 14px;
-  transition:all .2s;
-  backdrop-filter:blur(8px);
+  transition:border-color .2s,box-shadow .2s,background .2s;
 }
 .srow:hover{border-color:rgba(255,255,255,0.1)}
 .srow:focus-within{
@@ -358,8 +335,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
   border:1.5px solid var(--border);
   border-radius:12px;overflow:hidden;
   cursor:pointer;
-  transition:all .2s;
-  backdrop-filter:blur(8px);
+  transition:border-color .2s, transform .2s, box-shadow .2s;
 }
 .tcard:hover{border-color:rgba(0,232,122,0.5);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
 .tcard.on{
@@ -376,10 +352,9 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
   padding:14px 16px;
   border:1px solid var(--border);
   border-radius:12px;
-  background:rgba(255,255,255,0.025);
+  background:rgba(255,255,255,0.03);
   cursor:pointer;
-  transition:all .2s;
-  backdrop-filter:blur(8px);
+  transition:border-color .2s, background .2s;
 }
 .tog:hover{border-color:rgba(255,255,255,0.1);background:rgba(255,255,255,0.04)}
 .tog.on{
@@ -463,21 +438,19 @@ textarea{resize:vertical;min-height:80px;line-height:1.6}
 .copybtn{
   display:inline-flex;align-items:center;gap:8px;
   padding:10px 20px;
-  background:var(--glass);
+  background:rgba(255,255,255,0.05);
   border:1px solid var(--border);
   border-radius:10px;
   color:var(--text2);
   font-family:'Space Mono',monospace;font-size:11.5px;
-  cursor:pointer;transition:all .2s;
-  backdrop-filter:blur(12px);
+  cursor:pointer;transition:border-color .2s,color .2s,background .2s;
 }
 .copybtn:hover{border-color:var(--accent);color:var(--accent);background:var(--adim)}
 .copybtn.ok{border-color:var(--accent);color:var(--accent);background:rgba(0,232,122,0.1)}
 
 .codeblk{
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,0.06);
+  background:rgba(0,0,0,0.5);
+  border:1px solid rgba(255,255,255,0.07);
   border-radius:16px;padding:28px;
   font-family:'Space Mono',monospace;font-size:11px;line-height:1.8;
   color:#5dffaa;white-space:pre;overflow:auto;max-height:500px;
@@ -515,12 +488,6 @@ footer strong{color:var(--accent)}
 </style>
 </head>
 <body>
-
-<div class="bg-orbs">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-</div>
 
 <div class="wrap">
 
@@ -817,6 +784,11 @@ footer strong{color:var(--accent)}
 <script>
 // ── CHIP TOGGLE ──
 document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('on')));
+
+// Clean up will-change after card animations
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('animationend',()=>{ card.style.willChange='auto'; },{once:true});
+});
 
 // ── THEME SELECT ──
 let theme='tokyonight';
