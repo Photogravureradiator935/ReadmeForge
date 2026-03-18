@@ -1,10 +1,15 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0d2a1a,00e87a&height=240&section=header&text=ReadmeForge&fontSize=80&fontColor=ffffff&fontAlignY=38&fontStyle=bold&desc=GitHub%20Profile%20README%20Generator&descSize=20&descAlignY=58&descColor=ffffffbb&animation=fadeIn&stroke=ffffff&strokeWidth=2" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0,0d2a1a,00e87a&height=240&section=header&text=ReadmeForge&fontSize=80&fontColor=ffffff&fontAlignY=38&fontStyle=bold&desc=GitHub%20Profile%20README%20Generator&descSize=20&descAlignY=58&descColor=ffffffbb&animation=fadeIn&stroke=ffffff&strokeWidth=2" width="100%"/>
 </div>
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/Open%20App-00e87a?style=flat-square&logo=googlechrome&logoColor=black)](https://lebedevnet.github.io/ReadmeForge/)
+<a href="https://lebedevnet.github.io/ReadmeForge/">
+  <img src="https://img.shields.io/badge/🚀%20Open%20App%20→-00e87a?style=for-the-badge&logoColor=black" height="36" alt="Open App"/>
+</a>
+
+&nbsp;
+
 [![Stars](https://img.shields.io/github/stars/lebedevnet/ReadmeForge?style=flat-square&color=ffd700&logo=github&logoColor=white)](https://github.com/lebedevnet/ReadmeForge/stargazers)
 [![Forks](https://img.shields.io/github/forks/lebedevnet/ReadmeForge?style=flat-square&color=6366f1&logo=github&logoColor=white)](https://github.com/lebedevnet/ReadmeForge/network/members)
 [![License](https://img.shields.io/badge/MIT-3b82f6?style=flat-square)](LICENSE)
@@ -21,8 +26,6 @@ Pick your stack → choose a theme → generate → copy. No coding, no sign-up,
 <div align="center">
 
 [![ReadmeForge Preview](https://raw.githubusercontent.com/lebedevnet/ReadmeForge/main/preview.png)](https://lebedevnet.github.io/ReadmeForge/)
-
-**[lebedevnet.github.io/ReadmeForge](https://lebedevnet.github.io/ReadmeForge/)**
 
 </div>
 
@@ -79,17 +82,15 @@ No npm. No build step. No config.
 
 ---
 
-### Roadmap
-
-**Done** &nbsp; 60+ technologies · 18 accent colors & gradients · 16 stat themes · live preview · header info card · custom quote · spoken languages
-
-**Planned** &nbsp; Export as `.md` file download · PWA offline support · Localization (RU, ZH, ES) · More widgets
-
----
-
 ### Contributing
 
-Fork the repo, make your changes, open a Pull Request.
+All suggestions are welcome — I read every issue and pull request. If you have an idea for a new feature, a missing technology, or a bug fix, here's how to contribute:
+
+**1. Fork the repo** — click Fork at the top right of the GitHub page. This creates your own copy of ReadmeForge under your account.
+
+**2. Make your changes** — clone your fork, edit the files (everything is in `index.html`), and test it by opening the file in a browser.
+
+**3. Open a Pull Request** — push your changes and click "Compare & pull request" on GitHub. Describe what you changed and why.
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/ReadmeForge.git
@@ -98,7 +99,17 @@ git commit -m "feat: describe your change"
 git push origin feat/your-feature
 ```
 
-Good first issues: missing tech stacks · new color themes · localization · bug fixes
+Good first contributions: missing tech stacks · new gradient colors · language flags · bug fixes · localization (RU, ZH, ES)
+
+> Not sure how to start? Open an [Issue](https://github.com/lebedevnet/ReadmeForge/issues) describing your idea — I'll help figure out the implementation.
+
+---
+
+### Roadmap
+
+**Done** &nbsp; 60+ technologies · 18 accent colors & gradients · 16 stat themes · live preview · header info card · custom quote · spoken languages
+
+**Planned** &nbsp; Export as `.md` file download · PWA offline support · Localization (RU, ZH, ES) · More widgets
 
 ---
 
@@ -114,6 +125,6 @@ MIT © [lebedevnet](https://github.com/lebedevnet) — free to use, fork, and mo
 
 [![Star](https://img.shields.io/github/stars/lebedevnet/ReadmeForge?style=social)](https://github.com/lebedevnet/ReadmeForge)
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0d2a1a,00e87a&height=120&section=footer" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0,0d2a1a,00e87a&height=120&section=footer" width="100%"/>
 
 </div>
