@@ -857,19 +857,25 @@ function gen() {
     const enc = lines.map(l => encodeURIComponent(l)).join(';');
     o += `[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=${accentHex}&center=true&vCenter=true&width=600&lines=${enc})](https://git.io/typing-svg)\n\n`;
   }
-  if (socs.length) { o += `<br/>\n\n` + socs.join(' ') + '\n\n'; }
+  if (socs.length) { o += socs.join(' ') + '\n\n'; }
   if (T.views) o += `![Profile Views](https://komarev.com/ghpvc/?username=${user}&color=${accentHex}&style=flat-square)\n\n`;
   o += `</div>\n\n---\n\n`;
 
   // ABOUT
   o += `## About\n\n`;
   if (bio) o += `${bio}\n\n`;
-  const infoLines = [];
-  if (loc)   infoLines.push(`📍 **Location** &nbsp; ${loc}`);
-  if (exp)   infoLines.push(`⌗ **Experience** &nbsp; ${exp}`);
-  if (edu)   infoLines.push(`◎ **Education** &nbsp; ${edu}`);
-  if (learn) infoLines.push(`⟳ **Learning** &nbsp; ${learn}`);
-  if (infoLines.length) o += infoLines.join('\n') + '\n\n';
+  const infoRows = [];
+  if (loc)   infoRows.push(['📍', 'Location',   loc]);
+  if (exp)   infoRows.push(['⌗', 'Experience', exp]);
+  if (edu)   infoRows.push(['◎', 'Education',  edu]);
+  if (learn) infoRows.push(['⟳', 'Learning',   learn]);
+  if (infoRows.length) {
+    o += `<table>\n`;
+    infoRows.forEach(([sym, label, val]) => {
+      o += `<tr><td>${sym} <b>${label}</b></td><td>${val}</td></tr>\n`;
+    });
+    o += `</table>\n\n`;
+  }
   if (fun) o += `> ⚡ ${fun}\n\n`;
   o += `---\n\n`;
 
@@ -884,63 +890,58 @@ function gen() {
         o += s.cs.map(c => badge(c.nm, c.c, c.l, c.lc)).join(' ') + '\n\n';
       }
     });
-    o += `---\n\n`;
   }
 
-  // LANGUAGES
+  // LANGUAGES — clean table with block bars
   if (slangs.length) {
-    o += `## Languages\n\n<div align="center">\n\n| &nbsp; | Language | Level |\n|:---:|:---|:---:|\n`;
+    o += `---\n\n## Languages\n\n`;
+    o += `| | Language | Level | &nbsp; |\n|:---:|:---|:---|:---|\n`;
     slangs.forEach(l => {
-      const col = lvlColors[l.lv] || '888888';
-      o += `| ${langFlag(l.nm)} | ${l.nm} | ![${l.lb}](https://img.shields.io/badge/${encodeURIComponent(l.lb)}-${col}?style=flat-square) |\n`;
+      const filled = '█'.repeat(l.lv) + '░'.repeat(5 - l.lv);
+      o += `| ${langFlag(l.nm)} | **${l.nm}** | ${l.lb} | \`${filled}\` |\n`;
     });
-    o += `\n</div>\n\n---\n\n`;
+    o += `\n`;
   }
 
   // STATS
   if (T.stats || T.langs) {
-    o += `## GitHub Stats\n\n<div align="center">\n\n`;
+    o += `---\n\n## GitHub Stats\n\n<div align="center">\n\n`;
     if (T.stats) o += `<img height="180em" src="https://github-readme-stats.vercel.app/api?username=${user}&show_icons=true&theme=${theme}&include_all_commits=true&count_private=true&hide_border=true"/>\n&nbsp;\n`;
     if (T.langs) o += `<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=${user}&layout=compact&langs_count=8&theme=${theme}&hide_border=true"/>\n`;
     o += `\n</div>\n\n`;
   }
   if (T.streak) o += `<div align="center">\n\n[![GitHub Streak](https://streak-stats.demolab.com?user=${user}&theme=${theme}&hide_border=true)](https://git.io/streak-stats)\n\n</div>\n\n`;
-  if (T.stats || T.langs || T.streak) o += `---\n\n`;
 
   // TROPHIES
   if (T.trophies) {
     const supported = ['flat','onedark','gruvbox','dracula','monokai','chalk','nord','alduin','darkhub','juicyfresh','buddhism','radical','onestar','discord','algolia','gitdimmed','tokyonight','matrix','apprentice','dark_dimmed','midnight_purple','kimbie_dark'];
     const tt = supported.includes(theme) ? theme : 'tokyonight';
-    o += `## Trophies\n\n<div align="center">\n\n<a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=${user}&theme=${tt}&column=6&no-frame=true&margin-w=8" alt="trophies"/></a>\n\n</div>\n\n---\n\n`;
+    o += `---\n\n## Trophies\n\n<div align="center">\n\n<a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=${user}&theme=${tt}&column=6&no-frame=true&margin-w=8" alt="trophies"/></a>\n\n</div>\n\n`;
   }
 
   // ACTIVITY
   if (T.activity) {
     const agMap = {'tokyonight':'tokyo-night','radical':'redical','dracula':'dracula','nord':'nord-dark','gruvbox':'github','onedark':'react-dark','cobalt':'cobalt','synthwave':'synthwave','merko':'merko','midnight_purple':'midnight-purple','ocean_dark':'ocean-dark','aura':'aura','github_dark':'github-dark','material_palenight':'material_palenight','calm':'minimal','solarized-light':'minimal'};
     const ag = agMap[theme] || 'tokyo-night';
-    o += `## Activity\n\n[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=${user}&theme=${ag}&hide_border=true&area=true)](https://github.com/ashutosh00710/github-readme-activity-graph)\n\n---\n\n`;
+    o += `---\n\n## Activity\n\n[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=${user}&theme=${ag}&hide_border=true&area=true)](https://github.com/ashutosh00710/github-readme-activity-graph)\n\n`;
   }
 
   // WAKATIME
-  if (T.waka) o += `## Coding Time\n\n<div align="center">\n\n[![WakaTime](https://github-readme-stats.vercel.app/api/wakatime?username=${user}&theme=${theme}&hide_border=true)](https://wakatime.com/@${user})\n\n</div>\n\n> ⚠️ Requires a public WakaTime profile\n\n---\n\n`;
+  if (T.waka) o += `---\n\n## Coding Time\n\n<div align="center">\n\n[![WakaTime](https://github-readme-stats.vercel.app/api/wakatime?username=${user}&theme=${theme}&hide_border=true)](https://wakatime.com/@${user})\n\n</div>\n\n> ⚠️ Requires a public WakaTime profile\n\n`;
 
   // SPOTIFY
-  if (T.spotify) o += `## Now Playing\n\n<div align="center">\n\n[![Spotify](https://novatorem.vercel.app/api/spotify)](https://open.spotify.com)\n\n</div>\n\n> ⚠️ Requires [Novatorem](https://github.com/novatorem/novatorem) setup\n\n---\n\n`;
+  if (T.spotify) o += `---\n\n## Now Playing\n\n<div align="center">\n\n[![Spotify](https://novatorem.vercel.app/api/spotify)](https://open.spotify.com)\n\n</div>\n\n> ⚠️ Requires [Novatorem](https://github.com/novatorem/novatorem) setup\n\n`;
 
   // SNAKE
   if (T.snake) {
-    o += `## Contribution Snake\n\n<div align="center">\n\n<picture>\n  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake-dark.svg">\n  <img alt="snake" src="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake.svg">\n</picture>\n\n</div>\n\n> ⚠️ Requires GitHub Actions setup\n\n---\n\n`;
+    o += `---\n\n## Contribution Snake\n\n<div align="center">\n\n<picture>\n  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake-dark.svg">\n  <img alt="snake" src="https://raw.githubusercontent.com/${user}/${user}/output/github-contribution-grid-snake.svg">\n</picture>\n\n</div>\n\n> ⚠️ Requires GitHub Actions setup\n\n`;
   }
 
   // QUOTE
   if (T.quote) {
-    o += `<div align="center">\n\n`;
-    if (customQuote) {
-      o += `> *"${customQuote}"*\n\n`;
-    } else {
-      o += `![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=${theme})\n\n`;
-    }
-    o += `</div>\n\n---\n\n`;
+    o += `---\n\n<div align="center">\n\n`;
+    o += customQuote ? `> *"${customQuote}"*\n\n` : `![Quote](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=${theme})\n\n`;
+    o += `</div>\n\n`;
   }
 
   // FOOTER
