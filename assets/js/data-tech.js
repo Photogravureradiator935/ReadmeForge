@@ -276,6 +276,15 @@ export const TECH_GROUPS = [
         skillIcon: "flutter",
         aliases: [],
       },
+      {
+        id: "qt",
+        label: "Qt",
+        value: "Qt",
+        badgeColor: "41CD52",
+        badgeLogo: "qt",
+        skillIcon: "qt",
+        aliases: ["qtcreator"],
+      },
     ],
   },
   {
